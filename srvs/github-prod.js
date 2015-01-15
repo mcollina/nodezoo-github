@@ -11,7 +11,7 @@ require('seneca')()
   .use('mem-store',{web:{dump:true}})
   .use('beanstalk-transport')
   .use('../github.js')
-  .use('collector', { host: influxIP })
+  .use('collector', { host: influxIP, database: 'stats', seriesName: 'actions' })
   .add('role:info,req:part',function(args,done){
     done();
     this.act('role:github,cmd:get', {name:args.name}, function(err,mod){
